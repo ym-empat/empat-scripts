@@ -2,6 +2,13 @@
 
 set -e
 
+# Перевіряємо чи вже встановлений node_exporter
+if command -v /usr/local/bin/node_exporter &>/dev/null; then
+    echo "ℹ️ Node Exporter вже встановлений у /usr/local/bin/node_exporter."
+    echo "⛔ Завершення скрипта."
+    exit 0
+fi
+
 # Визначаємо архітектуру
 ARCH=$(uname -m)
 
