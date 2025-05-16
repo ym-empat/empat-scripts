@@ -42,6 +42,15 @@ else
     echo "ℹ️ Користувач mysqld_exporter вже існує"
 fi
 
+# Створюємо MySQL юзера, якщо ще не існує
+echo "👤 Створюємо користувача 'exporter' в MySQL (якщо ще немає)..."
+sudo mysql <<EOF
+CREATE USER IF NOT EXISTS 'exporter'@'localhost' IDENTIFIED BY '9pEhZYPaiNGVRUbRLG';
+GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'localhost';
+FLUSH PRIVILEGES;
+EOF
+echo "✅ MySQL користувач 'exporter' створений або вже існує"
+
 # Створюємо credentials файл
 MYSQL_EXPORTER_CNF="/etc/.mysqld_exporter.cnf"
 
