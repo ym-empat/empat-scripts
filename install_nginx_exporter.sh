@@ -3,7 +3,7 @@
 set -e
 
 EXPORTER_BIN="/usr/local/bin/nginx-prometheus-exporter"
-EXPORTER_VERSION="1.4.1"
+EXPORTER_VERSION="1.1.0"
 NGINX_STATUS_PORT=9145
 SCRAPE_URI="http://127.0.0.1:${NGINX_STATUS_PORT}/nginx_status"
 
@@ -27,10 +27,12 @@ fi
 echo "✅ Визначено архітектуру: $ARCH"
 echo "📥 Завантажуємо Nginx Exporter з: $DOWNLOAD_URL"
 
+# Завантаження та розпакування
 cd /tmp
 wget -q "$DOWNLOAD_URL" -O nginx_exporter.tar.gz
-tar xvfz nginx_exporter.tar.gz
-cd nginx-prometheus-exporter_*
+mkdir -p /tmp/nginx_exporter_unpack
+tar -xvzf nginx_exporter.tar.gz -C /tmp/nginx_exporter_unpack --strip-components=1
+cd /tmp/nginx_exporter_unpack
 
 # Копіюємо бінарник
 sudo cp nginx-prometheus-exporter "$EXPORTER_BIN"
