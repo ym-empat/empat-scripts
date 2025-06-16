@@ -31,10 +31,15 @@ echo "📥 Завантажуємо Nginx Exporter з: $DOWNLOAD_URL"
 cd /tmp
 wget -q "$DOWNLOAD_URL" -O nginx_exporter.tar.gz
 mkdir -p /tmp/nginx_exporter_unpack
-tar -xvzf nginx_exporter.tar.gz -C /tmp/nginx_exporter_unpack --strip-components=1
+tar -xvzf nginx_exporter.tar.gz -C /tmp/nginx_exporter_unpack
 cd /tmp/nginx_exporter_unpack
 
 # Копіюємо бінарник
+if [ ! -f "nginx-prometheus-exporter" ]; then
+    echo "❌ Бінарник nginx-prometheus-exporter не знайдено після розпакування"
+    exit 1
+fi
+
 sudo cp nginx-prometheus-exporter "$EXPORTER_BIN"
 sudo chmod +x "$EXPORTER_BIN"
 
@@ -91,4 +96,4 @@ sudo systemctl daemon-reload
 sudo systemctl enable nginx_exporter
 sudo systemctl start nginx_exporter
 
-echo "🚀 Nginx Exporter успішно встановлений і запущений!"
+echo "🚀 Nginx Exporter v${EXPORTER_VERSION} успішно встановлений і запущений!"
