@@ -16,9 +16,9 @@ fi
 
 ARCH=$(uname -m)
 if [[ "$ARCH" == "x86_64" ]]; then
-    DOWNLOAD_URL="https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v${EXPORTER_VERSION}/nginx-prometheus-exporter_${EXPORTER_VERSION}_linux_amd64.tar.gz"
+    DOWNLOAD_URL="https://github.com/nginx/nginx-prometheus-exporter/releases/download/v${EXPORTER_VERSION}/nginx-prometheus-exporter_${EXPORTER_VERSION}_linux_amd64.tar.gz"
 elif [[ "$ARCH" == "aarch64" ]]; then
-    DOWNLOAD_URL="https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v${EXPORTER_VERSION}/nginx-prometheus-exporter_${EXPORTER_VERSION}_linux_arm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/nginx/nginx-prometheus-exporter/releases/download/v${EXPORTER_VERSION}/nginx-prometheus-exporter_${EXPORTER_VERSION}_linux_arm64.tar.gz"
 else
     echo "❌ Невідома архітектура: $ARCH"
     exit 1
